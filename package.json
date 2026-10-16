@@ -1,0 +1,22 @@
+{
+  "name": "rajesh-hub",
+  "private": true,
+  "description": "Rajesh's shared components and features for every app, website and trading bot.",
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "templates/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.check.json --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "~5.9.3",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@types/node": "^24.12.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  }
+}

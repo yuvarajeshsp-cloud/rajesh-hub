@@ -1,0 +1,87 @@
+/* Rajesh Hub website tokens + base styles (from paavai-embroidery-web).
+   Plain CSS, no Tailwind. Load Playfair Display, Mukta Malar and Noto Serif Tamil from Google Fonts. */
+/* Brand: primary #d3d3ff (lavender), secondary #9f9fff (periwinkle).
+   Both are light, so text and buttons use a deep indigo for contrast. */
+:root {
+  --lavender: #d3d3ff;
+  --periwinkle: #9f9fff;
+  --lavender-50: #f6f6ff;
+  --lavender-100: #ececff;
+  --ink: #23224f;
+  --ink-soft: #4a4980;
+  --accent: #3b38a6;
+  --accent-hover: #2e2b8a;
+  --whatsapp: #128c4a;
+  --surface: #ffffff;
+  --border: #dcdcf5;
+  --radius: 14px;
+  --shadow: 0 6px 24px rgb(35 34 79 / 0.08);
+  --font-body: 'Mukta Malar', system-ui, sans-serif;
+  --font-head: 'Playfair Display', 'Noto Serif Tamil', Georgia, serif;
+  --max: 1120px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--lavender-50);
+}
+:lang(ta) body, body:lang(ta) { line-height: 1.8; }
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--accent); }
+a:hover { color: var(--accent-hover); }
+h1, h2, h3 { font-family: var(--font-head); line-height: 1.25; margin: 0 0 0.6em; color: var(--ink); }
+h1 { font-size: clamp(2rem, 5vw, 3.2rem); }
+h2 { font-size: clamp(1.6rem, 3.5vw, 2.2rem); }
+h3 { font-size: 1.2rem; }
+:lang(ta) h1 { font-size: clamp(1.7rem, 4.2vw, 2.7rem); }
+p { margin: 0 0 1em; }
+
+.container { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 16px; }
+.section { padding: clamp(48px, 8vw, 88px) 0; }
+.section--tint { background: var(--lavender-100); }
+.section__intro { max-width: 640px; color: var(--ink-soft); margin-bottom: 2rem; }
+.center { text-align: center; }
+.center .section__intro { margin-left: auto; margin-right: auto; }
+
+.skip { position: absolute; left: -9999px; }
+.skip:focus { left: 16px; top: 16px; z-index: 100; background: #fff; padding: 8px 12px; border-radius: 8px; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5em;
+  min-height: 48px; padding: 0.7em 1.4em; border-radius: 999px; border: 2px solid transparent;
+  font: inherit; font-weight: 600; text-decoration: none; cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.btn--primary { background: var(--accent); color: #fff; }
+.btn--primary:hover { background: var(--accent-hover); color: #fff; }
+.btn--whatsapp { background: var(--whatsapp); color: #fff; }
+.btn--whatsapp:hover { background: #0e7a40; color: #fff; }
+.btn--ghost { background: transparent; color: var(--accent); border-color: var(--periwinkle); }
+.btn--ghost:hover { background: var(--lavender); color: var(--ink); }
+.btn:focus-visible, a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 3px solid var(--periwinkle); outline-offset: 2px;
+}
+.btn-row { display: flex; flex-wrap: wrap; gap: 12px; }
+
+.card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 24px; box-shadow: var(--shadow);
+}
+.grid { display: grid; gap: 20px; }
+.grid--3 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.grid--4 { grid-template-columns: repeat(auto-fill, minmax(min(45%, 220px), 1fr)); }
+@media (max-width: 480px) { .grid--4 { gap: 10px; } }
+
+.tag {
+  display: inline-block; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.02em;
+  background: var(--lavender); color: var(--ink); border-radius: 999px; padding: 2px 10px;
+}
+
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }

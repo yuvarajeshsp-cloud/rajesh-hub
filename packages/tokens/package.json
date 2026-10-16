@@ -1,0 +1,12 @@
+{
+  "name": "@rajesh-hub/tokens",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Brand colours, type and base styles for apps (Tailwind 4) and websites (plain CSS).",
+  "type": "module",
+  "exports": {
+    "./app.css": "./app.css",
+    "./web.css": "./web.css",
+    "./mobile.css": "./mobile.css"
+  }
+}

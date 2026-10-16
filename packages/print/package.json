@@ -1,0 +1,15 @@
+{
+  "name": "@rajesh-hub/print",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Thermal receipt printing (ESC/POS over USB / Bluetooth), receipt layout and Excel export.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@capacitor/core": "^8.5.1",
+    "@capacitor-community/bluetooth-le": "^8.3.0",
+    "xlsx": "^0.18.5"
+  }
+}

@@ -1,0 +1,41 @@
+---
+import '@rajesh-hub/tokens/web.css';
+import ConsentBanner from '@rajesh-hub/web-growth/components/ConsentBanner.astro';
+import WhatsAppFloat from '@rajesh-hub/web-growth/components/WhatsAppFloat.astro';
+
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+const whatsapp = import.meta.env.PUBLIC_WHATSAPP_NUMBER || '';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mukta+Malar:wght@400;600&family=Playfair+Display:wght@600;700&family=Noto+Serif+Tamil:wght@600&display=swap" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <main id="main"><slot /></main>
+    {whatsapp && <WhatsAppFloat phone={whatsapp} label="Chat on WhatsApp" greeting="Hi! I found you on your website." />}
+    <ConsentBanner
+      text="We use cookies to measure our Instagram and Facebook ads."
+      accept="Accept"
+      decline="No thanks"
+      privacyHref="/privacy"
+      privacyLabel="Privacy policy"
+    />
+    <script>
+      import { initTracking, initShortlist, initStats } from '@rajesh-hub/web-growth';
+      initTracking();
+      initShortlist();
+      initStats();
+    </script>
+  </body>
+</html>

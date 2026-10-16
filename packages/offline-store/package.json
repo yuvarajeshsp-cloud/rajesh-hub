@@ -1,0 +1,19 @@
+{
+  "name": "@rajesh-hub/offline-store",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Crash-safe on-device data, daily snapshots, photos and zip backup/restore.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@capacitor/core": "^8.5.1",
+    "@capacitor/filesystem": "^8.1.3",
+    "fflate": "^0.8.3",
+    "@rajesh-hub/native": "*"
+  },
+  "peerDependencies": {
+    "react": "^19.2.4"
+  }
+}

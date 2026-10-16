@@ -1,0 +1,49 @@
+/* Mobile WebView hardening (from Microgreentracker): safe areas, no input zoom,
+   iOS date input fix, hidden scrollbars. Works with or without Tailwind. */
+html, body {
+  overscroll-behavior-y: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+body {
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+/* Smooth scroll for main content */
+main {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+/* Prevent input zoom on mobile */
+input, select, textarea {
+  font-size: 16px;
+}
+
+/* Hide scrollbar but keep functionality */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* iOS WebKit gives date inputs an intrinsic minimum width (wider than half a phone screen, which
+   pushed two-column rows off the screen), centred text and a different height. Make them behave
+   like the other fields. -webkit-touch-callout is only supported on iOS, so Android is unaffected. */
+@supports (-webkit-touch-callout: none) {
+  input[type='date'] {
+    -webkit-appearance: none;
+    appearance: none;
+    display: block;
+    min-width: 0;
+    max-width: 100%;
+    text-align: left;
+  }
+  input[type='date']::-webkit-date-and-time-value {
+    text-align: left;
+    min-height: 1.5em; /* keeps the box the same height while empty */
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "@rajesh-hub/web-growth",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Astro website kit: consent + Meta Pixel/CAPI, shortlist, item stats, WhatsApp button, Instagram feed, image CDN.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./components/*": "./src/components/*",
+    "./netlify/*": "./netlify/*"
+  },
+  "peerDependencies": {
+    "astro": "^7.3.8"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "@rajesh-hub/trading",
+  "version": "0.1.0",
+  "private": true,
+  "description": "MQL5 include libraries, TradingView-to-MT5 signal bridge and signal EA.",
+  "type": "module",
+  "files": [
+    "mql5",
+    "bridge",
+    "mac",
+    "mt5"
+  ]
+}

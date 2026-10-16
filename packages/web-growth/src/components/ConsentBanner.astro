@@ -1,0 +1,61 @@
+---
+// Cookie consent banner (from paavai-embroidery-web). Only shows when a Meta Pixel is
+// configured (PUBLIC_META_PIXEL_ID) and the visitor hasn't answered yet.
+interface Props {
+  text: string;
+  accept: string;
+  decline: string;
+  privacyHref: string;
+  privacyLabel: string;
+}
+const { text, accept, decline, privacyHref, privacyLabel } = Astro.props;
+---
+
+<div class="consent" role="dialog" aria-live="polite" aria-label="Cookies" hidden>
+  <p>
+    {text}
+    <a href={privacyHref}>{privacyLabel}</a>
+  </p>
+  <div class="btn-row">
+    <button type="button" class="btn btn--primary" data-consent="accept">{accept}</button>
+    <button type="button" class="btn btn--ghost" data-consent="decline">{decline}</button>
+  </div>
+</div>
+
+<style>
+  .consent {
+    position: fixed;
+    left: 16px;
+    right: 16px;
+    bottom: 84px;
+    z-index: 40;
+    max-width: 560px;
+    margin: 0 auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: 0 12px 40px rgb(35 34 79 / 0.2);
+    padding: 18px;
+    font-size: 0.95rem;
+  }
+  .consent[hidden] {
+    display: none;
+  }
+  .consent p {
+    margin-bottom: 12px;
+  }
+</style>
+
+<script>
+  import { consentAnswered, pixelConfigured, setConsent } from '../scripts/tracking';
+
+  // Only ask when there is something to consent to (a Pixel is configured).
+  const box = document.querySelector<HTMLElement>('.consent');
+  if (box && pixelConfigured() && !consentAnswered()) box.hidden = false;
+  box?.addEventListener('click', (e) => {
+    const choice = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-consent]')?.dataset.consent;
+    if (!choice) return;
+    setConsent(choice === 'accept');
+    box.hidden = true;
+  });
+</script>

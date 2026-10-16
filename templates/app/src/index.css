@@ -1,0 +1,8 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "@rajesh-hub/tokens/app.css";
+@import "@rajesh-hub/tokens/mobile.css";
+
+/* Let Tailwind see the class names used inside the shared components. */
+@source "../node_modules/@rajesh-hub/ui/src";
+@source "../../../packages/ui/src";

@@ -1,0 +1,202 @@
+/* Rajesh Hub app tokens (from Embroidery-Shop-Manager).
+   Import after tailwindcss and tw-animate-css:
+     @import "tailwindcss"; @import "tw-animate-css"; @import "@rajesh-hub/tokens/app.css";
+   Change brand colours here and every app picks them up. */
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  /* Brand colors */
+  --color-navy: var(--navy);
+  --color-brand-blue: var(--brand-blue);
+  --color-teal: var(--teal);
+  --color-gold: var(--gold);
+}
+
+:root {
+  --radius: 0.5rem;
+  /* Paavai Embroidery brand palette */
+  --navy: #17365D;
+  --brand-blue: #2F75B5;
+  --teal: #008C95;
+  --gold: #D99A2B;
+
+  --background: oklch(0.976 0.003 247);
+  --foreground: oklch(0.15 0.02 247);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.15 0.02 247);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.15 0.02 247);
+  --primary: #9F9FFF;
+  --primary-foreground: #ffffff;
+  --secondary: oklch(0.94 0.015 247);
+  --secondary-foreground: oklch(0.3 0.07 247);
+  --muted: oklch(0.94 0.01 247);
+  --muted-foreground: oklch(0.52 0.03 247);
+  --accent: oklch(0.91 0.025 200);
+  --accent-foreground: oklch(0.2 0.06 200);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.9 0.01 247);
+  --input: oklch(0.9 0.01 247);
+  --ring: oklch(0.5 0.1 247);
+  --chart-1: oklch(0.4 0.1 247);
+  --chart-2: oklch(0.55 0.12 200);
+  --chart-3: oklch(0.65 0.14 85);
+  --chart-4: oklch(0.6 0.13 155);
+  --chart-5: oklch(0.7 0.15 30);
+  --sidebar: #D3D3FF;
+  --sidebar-foreground: #2b2b55;
+  --sidebar-primary: #9F9FFF;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #BFBFFA;
+  --sidebar-accent-foreground: #2b2b55;
+  --sidebar-border: #C3C3F5;
+  --sidebar-ring: #9F9FFF;
+}
+
+.dark {
+  --background: oklch(0.13 0.03 247);
+  --foreground: oklch(0.95 0.01 247);
+  --card: oklch(0.18 0.03 247);
+  --card-foreground: oklch(0.95 0.01 247);
+  --popover: oklch(0.2 0.04 247);
+  --popover-foreground: oklch(0.95 0.01 247);
+  --primary: oklch(0.7 0.1 247);
+  --primary-foreground: oklch(0.13 0.03 247);
+  --secondary: oklch(0.25 0.04 247);
+  --secondary-foreground: oklch(0.95 0.01 247);
+  --muted: oklch(0.25 0.03 247);
+  --muted-foreground: oklch(0.65 0.03 247);
+  --accent: oklch(0.3 0.05 200);
+  --accent-foreground: oklch(0.95 0.01 247);
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.6 0.1 247);
+  --chart-1: oklch(0.6 0.12 247);
+  --chart-2: oklch(0.65 0.14 200);
+  --chart-3: oklch(0.75 0.16 85);
+  --chart-4: oklch(0.7 0.15 155);
+  --chart-5: oklch(0.75 0.17 30);
+  --sidebar: oklch(0.16 0.04 247);
+  --sidebar-foreground: oklch(0.92 0.01 247);
+  --sidebar-primary: oklch(0.65 0.14 85);
+  --sidebar-primary-foreground: oklch(0.15 0.02 247);
+  --sidebar-accent: oklch(0.22 0.05 247);
+  --sidebar-accent-foreground: oklch(0.92 0.01 247);
+  --sidebar-border: oklch(1 0 0 / 12%);
+  --sidebar-ring: oklch(0.5 0.1 247);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  /* WebKit forces content-box (plus its own internal padding) on native
+     date/time inputs regardless of a border-box reset elsewhere, which
+     makes them render wider than same-row siblings and overflow their
+     container. Force border-box so they respect width:100% like any
+     other input. */
+  input[type="date"],
+  input[type="time"],
+  input[type="datetime-local"],
+  input[type="month"],
+  input[type="week"] {
+    box-sizing: border-box;
+  }
+}
+
+/* Mobile WebViews (iOS/Android) don't show :hover, and the native tap
+   highlight is inconsistent across platforms — give every button its own
+   explicit press feedback instead so taps always feel registered. Left
+   unlayered (not @layer base) so it isn't silently overridden by a
+   component's own `transition-*`/`shadow-*` utility classes, which sit in
+   Tailwind's higher-priority utilities layer. */
+button:not(:disabled) {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition: transform 100ms ease, filter 100ms ease, box-shadow 100ms ease;
+}
+button:not(:disabled):active {
+  transform: scale(0.96);
+  filter: brightness(0.94);
+  box-shadow: inset 0 1px 4px rgb(0 0 0 / 0.15);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-muted;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-border rounded-full;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-muted-foreground/30;
+}
+
+/* Native-style page stack for the mobile More section: pages push in from the
+   right and slide back out to the right, the page beneath drifting a little. */
+@keyframes stack-in-forward { from { transform: translateX(100%); } to { transform: translateX(0); } }
+@keyframes stack-under-forward { from { transform: translateX(0); filter: brightness(1); } to { transform: translateX(-28%); filter: brightness(0.9); } }
+@keyframes stack-in-back { from { transform: translateX(-28%); filter: brightness(0.9); } to { transform: translateX(0); filter: brightness(1); } }
+@keyframes stack-out-back { from { transform: translateX(0); } to { transform: translateX(100%); } }
+
+.stack-in-forward { animation: stack-in-forward 300ms cubic-bezier(0.32, 0.72, 0, 1) both; }
+.stack-under-forward { animation: stack-under-forward 300ms cubic-bezier(0.32, 0.72, 0, 1) both; }
+.stack-in-back { animation: stack-in-back 300ms cubic-bezier(0.32, 0.72, 0, 1) both; }
+.stack-out-back { animation: stack-out-back 300ms cubic-bezier(0.32, 0.72, 0, 1) both; }
+
+.stack-layer-min { min-height: calc(100svh - 4rem - env(safe-area-inset-top) - env(safe-area-inset-bottom)); }
+.stack-layer-fixed {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: env(safe-area-inset-top);
+  bottom: calc(4rem + env(safe-area-inset-bottom));
+  overflow: hidden;
+}
+.stack-layer-shadow { box-shadow: -10px 0 28px rgb(0 0 0 / 0.14); }
