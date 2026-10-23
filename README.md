@@ -64,6 +64,10 @@ import { BrandProvider, ThemeProvider, Button, Dialog, DateRangeFilter } from "@
   </BrandProvider>
 </ThemeProvider>
 ```
+Mobile tab bar with the selected tab cut out of the bar (routing stays in the app):
+```tsx
+<BottomNav items={[{ key: "home", label: "Home", icon: Home }, …]} active={tab} onSelect={setTab} />
+```
 On phones, `Dialog` opens as a full page with the brand header, edge-swipe back and Android back-button support.
 
 **Print**:
