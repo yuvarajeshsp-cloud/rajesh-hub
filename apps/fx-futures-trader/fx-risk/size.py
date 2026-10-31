@@ -14,7 +14,7 @@ import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "fx-core"))
 
-from fxcore import cli_setup, instruments as I, orders as O, store  # noqa: E402
+from fxcore import activity, cli_setup, instruments as I, orders as O, store  # noqa: E402
 
 
 def allocate(qty, step, weights):
@@ -142,4 +142,4 @@ def main(argv=None):
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(activity.run("size", main))

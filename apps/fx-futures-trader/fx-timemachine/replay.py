@@ -13,7 +13,7 @@ import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "fx-core"))
 
-from fxcore import bars as B, cli_setup, instruments as I, plan as P, setups as S, store, tz  # noqa: E402
+from fxcore import activity, bars as B, cli_setup, instruments as I, plan as P, setups as S, store, tz  # noqa: E402
 
 
 def history(data, spec, pl, before_t, sessions):
@@ -145,4 +145,4 @@ def main(argv=None):
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(activity.run("replay", main))

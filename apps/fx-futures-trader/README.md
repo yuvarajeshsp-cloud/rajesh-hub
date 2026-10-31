@@ -48,6 +48,12 @@ Everything is written to `trader/` in the folder you run from (or
 `FX_TRADER_DIR`): `config.json`, `instruments.json` (your spec overrides),
 `bars/`, `events.json`, `plan.json`, `replay.json`, `orders.json`, `state/`.
 
+## Live console
+
+`apps/fx-console` shows every stage as it runs, with the streamed output of each
+script, the plan, the odds, the risk verdict and today's limits:
+`cd apps/fx-console && npm run build && python3 server.py` (or `--demo`).
+
 ## Install
 
 In Claude Code, from the hub:

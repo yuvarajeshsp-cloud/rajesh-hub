@@ -20,7 +20,7 @@ import time
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "fx-core"))
 
-from fxcore import cli_setup, execution as X, instruments as I, ledger as L, orders as O, store  # noqa: E402
+from fxcore import activity, cli_setup, execution as X, instruments as I, ledger as L, orders as O, store  # noqa: E402
 
 RISK_FRESH_MIN = 15
 NO_WORDS = {"no", "not", "dont", "don't", "wait", "cancel", "stop", "hold", "maybe", "later", "all", "every", "both", "everything"}
@@ -438,4 +438,4 @@ def main(argv=None):
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(activity.run("broker", main))

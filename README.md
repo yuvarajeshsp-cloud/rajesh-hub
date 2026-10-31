@@ -2,7 +2,7 @@
 
 Shared designs, components and features for every app, website and trading bot, so nothing gets built twice.
 
-Built from: Embroidery-Shop-Manager, paavai-embroidery-web, Microgreentracker, MT--breakoutbot, SidewayBreakoutBot, RangeBreakeoutBot, HFT-Bot. The full list of 73 reusable parts, including the ones not moved here yet, is in [CATALOGUE.md](CATALOGUE.md).
+Built from: Embroidery-Shop-Manager, paavai-embroidery-web, Microgreentracker, MT--breakoutbot, SidewayBreakoutBot, RangeBreakeoutBot, HFT-Bot. The full list of 74 reusable parts, including the ones not moved here yet, is in [CATALOGUE.md](CATALOGUE.md).
 
 ## What's inside
 

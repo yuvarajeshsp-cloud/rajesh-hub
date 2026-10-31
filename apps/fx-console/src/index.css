@@ -1,0 +1,57 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "@rajesh-hub/tokens/app.css";
+@import "@rajesh-hub/tokens/mobile.css";
+
+/* Let Tailwind see the class names used inside the shared components. */
+@source "../node_modules/@rajesh-hub/ui/src";
+@source "../../../packages/ui/src";
+
+/* Console motion. Colours always come from the hub tokens. */
+@keyframes flow {
+  to { stroke-dashoffset: -24; }
+}
+@keyframes ring {
+  0% { box-shadow: 0 0 0 0 color-mix(in oklch, var(--teal) 55%, transparent); }
+  100% { box-shadow: 0 0 0 14px color-mix(in oklch, var(--teal) 0%, transparent); }
+}
+@keyframes sweep {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+@keyframes blink {
+  50% { opacity: 0; }
+}
+@keyframes rise {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+
+.flow-line { stroke-dasharray: 6 6; animation: flow 0.6s linear infinite; }
+.pulse-ring { animation: ring 1.4s ease-out infinite; }
+.scan-sweep::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, color-mix(in oklch, var(--teal) 18%, transparent), transparent);
+  animation: sweep 1.6s linear infinite;
+}
+.caret::after { content: "▌"; margin-left: 2px; animation: blink 1s steps(1) infinite; color: var(--teal); }
+.rise { animation: rise 0.25s ease-out both; }
+
+.console-bg {
+  background:
+    radial-gradient(1200px 500px at 10% -10%, color-mix(in oklch, var(--brand-blue) 16%, transparent), transparent 60%),
+    radial-gradient(900px 400px at 100% 0%, color-mix(in oklch, var(--teal) 10%, transparent), transparent 60%),
+    var(--background);
+}
+.grid-lines {
+  background-image:
+    linear-gradient(color-mix(in oklch, var(--foreground) 4%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklch, var(--foreground) 4%, transparent) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flow-line, .pulse-ring, .scan-sweep::after, .caret::after, .rise { animation: none; }
+}

@@ -12,7 +12,7 @@ import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "fx-core"))
 
-from fxcore import cli_setup, events as E, instruments as I, ledger as L, orders as O, store, tz  # noqa: E402
+from fxcore import activity, cli_setup, events as E, instruments as I, ledger as L, orders as O, store, tz  # noqa: E402
 
 DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 
@@ -169,4 +169,4 @@ def main(argv=None):
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(activity.run("check", main))
