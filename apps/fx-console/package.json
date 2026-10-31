@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:replay": "tsc -b && vite build --mode replay --base ./ --outDir dist-replay",
     "preview": "vite preview",
     "serve": "python3 server.py",
     "demo": "python3 server.py --demo"

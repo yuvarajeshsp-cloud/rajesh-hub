@@ -11,3 +11,4 @@ __pycache__/
 # fx-futures-trader working folders
 trader/
 *.tsbuildinfo
+dist-replay/

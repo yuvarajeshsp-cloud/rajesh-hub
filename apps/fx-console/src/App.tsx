@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react"
 import { Activity as ActivityIcon, CalendarClock, LoaderCircle, Radar, RefreshCw, Rewind, ShieldCheck, Wifi, WifiOff } from "lucide-react"
 import { Badge, Button, ModeToggle, Toaster, cn } from "@rajesh-hub/ui"
 import { toast } from "sonner"
-import { clock, money, runAction, useConsole } from "./lib/api"
+import { REPLAY, clock, money, runAction, useConsole } from "./lib/api"
 import { Pipeline } from "./components/pipeline"
 import { Terminal } from "./components/terminal"
 import { NewsCard, OddsCard, PlanCard, RiskCard, ScanCard, TodayCard } from "./components/panels"
@@ -73,9 +73,9 @@ export default function App() {
             </div>
           </div>
           <div className="flex flex-wrap items-center gap-2">
-            <Badge variant="outline" className={cn("gap-1.5", live === "live" ? "border-chart-4/50 text-chart-4" : live === "offline" ? "border-destructive/50 text-destructive" : "border-gold/50 text-gold")}>
-              {live === "live" ? <Wifi /> : live === "offline" ? <WifiOff /> : <LoaderCircle className="animate-spin" />}
-              {live === "live" ? "live" : live === "offline" ? "reconnecting" : "connecting"}
+            <Badge variant="outline" className={cn("gap-1.5", live === "live" || live === "replay" ? "border-chart-4/50 text-chart-4" : live === "offline" ? "border-destructive/50 text-destructive" : "border-gold/50 text-gold")}>
+              {live === "live" || live === "replay" ? <Wifi /> : live === "offline" ? <WifiOff /> : <LoaderCircle className="animate-spin" />}
+              {live === "live" ? "live" : live === "replay" ? "replaying a recorded run" : live === "offline" ? "reconnecting" : "connecting"}
             </Badge>
             {state?.demo && <Badge variant="outline" className="border-gold/60 bg-gold/10 text-gold">DEMO data</Badge>}
             {state && (
@@ -102,7 +102,7 @@ export default function App() {
           <div className="grid min-h-[60svh] place-items-center text-sm text-muted-foreground">
             <div className="flex items-center gap-2">
               <LoaderCircle className="size-4 animate-spin text-teal" />
-              {live === "offline" ? "Can't reach the console server. Start it with: python3 server.py" : "Connecting to the console server…"}
+              {live === "offline" ? (REPLAY ? "Could not load the recording." : "Can't reach the console server. Start it with: python3 server.py") : REPLAY ? "Loading the recorded run…" : "Connecting to the console server…"}
             </div>
           </div>
         ) : (
@@ -118,7 +118,7 @@ export default function App() {
                 </Button>
               ))}
               <span className="text-[11px] text-muted-foreground">
-                Read-only runs. Orders are approved and sent only in the chat.
+                {REPLAY ? "Buttons run stages on your PC's console; this page is a recording." : "Read-only runs. Orders are approved and sent only in the chat."}
               </span>
             </div>
 
@@ -143,7 +143,11 @@ export default function App() {
             </main>
 
             <footer className="pb-2 text-[11px] text-muted-foreground">
-              Watching <span className="font-mono">{state.trader_dir}</span>. Not financial advice; the time machine is a resampling of recent bars, not a forecast.
+              {REPLAY ? (
+                <>A recording of the real backend running its demo pipeline, played on a loop. On your PC, <span className="font-mono">python3 server.py</span> shows your own trades live.</>
+              ) : (
+                <>Watching <span className="font-mono">{state.trader_dir}</span>.</>
+              )} Not financial advice; the time machine is a resampling of recent bars, not a forecast.
             </footer>
           </>
         )}

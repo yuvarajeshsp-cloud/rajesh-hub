@@ -31,6 +31,13 @@ Run the server from the folder where you run the skills (or pass
 `python3 server.py` in one terminal and `npm run dev` in another (Vite
 proxies `/api` to the server).
 
+## On Claude (no server)
+
+`npm run build:replay` builds a version that plays `recording.json`, a
+capture of the server's real event stream during a demo cycle, on a loop.
+That is what the published Trading Console page on Claude runs. To refresh
+it, record the stream from `python3 server.py --demo` again and republish.
+
 ## How it knows what is happening
 
 Every skill script runs through `fxcore/activity.py`, which appends one JSON

@@ -75,13 +75,64 @@ export interface ConsoleState {
 
 const MAX_LINES = 800
 
+// `vite build --mode replay` makes a page that plays recording.json (a real
+// capture of the server's event stream) instead of connecting to a server.
+export const REPLAY = import.meta.env.MODE === "replay"
+
+interface Frame { at: number; event: "backlog" | "activity" | "state"; data: unknown }
+interface Recording { recorded_wall: number; seconds: number; frames: Frame[] }
+
+function playRecording(
+  setState: (s: ConsoleState) => void,
+  setLines: (f: (prev: Activity[]) => Activity[]) => void,
+  setLive: (l: "connecting" | "live" | "offline" | "replay") => void,
+) {
+  let stopped = false
+  const timers: number[] = []
+  // Shift recorded epochs so "6s ago" reads as now, on every loop.
+  const shiftActs = (evs: Activity[], d: number) => evs.map((e) => ({ ...e, ts: e.ts + d }))
+  const shiftState = (st: ConsoleState, d: number): ConsoleState => {
+    const ss: ConsoleState["stage_state"] = {}
+    for (const [k, v] of Object.entries(st.stage_state)) if (v) ss[k as StageId] = { ...v, at: v.at + d, started: v.started + d }
+    return { ...st, stage_state: ss }
+  }
+  fetch("./recording.json")
+    .then((r) => r.json() as Promise<Recording>)
+    .then((rec) => {
+      if (stopped) return
+      setLive("replay")
+      const loop = () => {
+        if (stopped) return
+        const d = Date.now() / 1000 - rec.recorded_wall
+        for (const f of rec.frames) {
+          timers.push(window.setTimeout(() => {
+            if (stopped) return
+            if (f.event === "backlog") setLines(() => shiftActs(f.data as Activity[], d))
+            else if (f.event === "activity") {
+              const add = shiftActs(f.data as Activity[], d)
+              setLines((prev) => {
+                const next = prev.concat(add)
+                return next.length > MAX_LINES ? next.slice(next.length - MAX_LINES) : next
+              })
+            } else setState(shiftState(f.data as ConsoleState, d))
+          }, f.at * 1000))
+        }
+        timers.push(window.setTimeout(loop, (rec.seconds + 1.5) * 1000))
+      }
+      loop()
+    })
+    .catch(() => setLive("offline"))
+  return () => { stopped = true; timers.forEach((t) => window.clearTimeout(t)) }
+}
+
 export function useConsole() {
   const [state, setState] = useState<ConsoleState | null>(null)
   const [lines, setLines] = useState<Activity[]>([])
-  const [live, setLive] = useState<"connecting" | "live" | "offline">("connecting")
+  const [live, setLive] = useState<"connecting" | "live" | "offline" | "replay">("connecting")
   const retry = useRef(0)
 
   useEffect(() => {
+    if (REPLAY) return playRecording(setState, setLines, setLive)
     let es: EventSource | null = null
     let timer: number | undefined
     let closed = false
@@ -116,6 +167,7 @@ export function useConsole() {
 }
 
 export async function runAction(action: string, args: Record<string, string> = {}) {
+  if (REPLAY) throw new Error("This page plays a recorded run. Start python3 server.py on your PC to run stages for real.")
   const res = await fetch("/api/run", {
     method: "POST",
     headers: { "Content-Type": "application/json", "X-FX-Console": "1" },
