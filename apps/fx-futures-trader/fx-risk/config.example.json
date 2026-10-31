@@ -1,0 +1,51 @@
+{
+  "account": {
+    "ccy": "USD",
+    "balance": 10000,
+    "risk_per_trade_pct": 0.5,
+    "risk_per_trade_money": null
+  },
+  "display_tz": "Asia/Kolkata",
+  "watchlist": ["EURUSD", "GBPUSD", "USDJPY", "XAUUSD", "ES", "NQ", "GC", "CL", "MCX_GOLD", "NIFTY"],
+  "paper": true,
+  "broker": "signals",
+  "brokers": {
+    "mt5": {
+      "common_files": null,
+      "folder": "RajeshHub\\tickets",
+      "magic": 20261031,
+      "slippage_points": 30,
+      "server_tz": "NY+7"
+    },
+    "ninjatrader": {
+      "incoming": null,
+      "outgoing": null,
+      "account": "Sim101",
+      "mode": "protect",
+      "atm_template": null,
+      "atm_templates": {},
+      "contract_months": {"ES": "12-26", "MES": "12-26", "NQ": "12-26", "MNQ": "12-26", "GC": "12-26", "MGC": "12-26", "CL": "12-26", "MCL": "12-26"}
+    }
+  },
+  "rates": {"USDINR": 88.0, "USDJPY": 152.0, "USDCAD": 1.39, "USDCHF": 0.80, "GBPUSD": 1.30},
+  "plan": {"targets_r": [1, 2, 3], "split": [0.3334, 0.3333, 0.3333], "be_after_tp1": true},
+  "limits": {
+    "max_risk_pct": 1.0,
+    "max_risk_money": null,
+    "daily_loss_limit_pct": 2.0,
+    "daily_loss_limit_money": null,
+    "max_trades_per_day": 3,
+    "min_rr": 1.5,
+    "max_spread_ticks": null,
+    "max_margin_pct": 30,
+    "news_blackout_before_min": 15,
+    "news_blackout_after_min": 15,
+    "news_impacts": ["High"],
+    "signal_max_age_min": 10,
+    "max_entry_drift_r": 0.25,
+    "acknowledge_specs": [],
+    "max_qty": {},
+    "allow_stacking": false
+  },
+  "approval_valid_min": 10
+}

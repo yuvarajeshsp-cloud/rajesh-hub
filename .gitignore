@@ -7,3 +7,6 @@ dist/
 !.env.example
 __pycache__/
 .build/
+
+# fx-futures-trader working folders
+trader/

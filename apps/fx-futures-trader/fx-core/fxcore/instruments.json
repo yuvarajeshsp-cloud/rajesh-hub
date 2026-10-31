@@ -1,0 +1,119 @@
+{
+  "_readme": "Default contract specs. tick_value is the money one tick is worth for ONE lot (forex/CFD) or ONE contract (futures), in value_ccy. Override or add any symbol in trader/instruments.json (same shape; your file wins, field by field). verified=false means the spec depends on your broker or changes from time to time: check it, then set verified=true in your override or list the symbol in config limits.acknowledge_specs. Futures margins change daily, so margin_per_contract is empty until you fill it in.",
+  "templates": {
+    "fx_major": {
+      "class": "fx", "unit": "lot", "contract_size": 100000, "tick_size": 0.00001, "pip_size": 0.0001,
+      "tick_value": 1.0, "min_qty": 0.01, "qty_step": 0.01, "max_qty": 50,
+      "margin": {"leverage": 30},
+      "session": {"tz": "Europe/London", "weekend_cutoff": {"tz": "America/New_York", "day": "Fri", "time": "16:00"}},
+      "ranges": {
+        "asia": {"tz": "Europe/London", "start": "00:00", "end": "07:00", "until": "12:00"},
+        "london": {"tz": "Europe/London", "start": "08:00", "end": "08:30", "until": "11:00"},
+        "ny": {"tz": "America/New_York", "start": "08:30", "end": "09:00", "until": "11:30"}
+      },
+      "default_range": "london",
+      "verified": true
+    },
+    "fx_jpy": {
+      "_base": "fx_major", "tick_size": 0.001, "pip_size": 0.01, "tick_value": 100.0, "value_ccy": "JPY",
+      "ranges": {
+        "tokyo": {"tz": "Asia/Tokyo", "start": "09:00", "end": "09:30", "until": "12:00"},
+        "london": {"tz": "Europe/London", "start": "08:00", "end": "08:30", "until": "11:00"},
+        "ny": {"tz": "America/New_York", "start": "08:30", "end": "09:00", "until": "11:30"}
+      }
+    },
+    "cme_index": {
+      "class": "future", "venue": "CME", "unit": "contract", "min_qty": 1, "qty_step": 1, "max_qty": 20,
+      "value_ccy": "USD", "currencies": ["USD"], "margin": {"per_contract": null},
+      "session": {"tz": "America/New_York", "flat_by": "15:55"},
+      "ranges": {"orb": {"tz": "America/New_York", "start": "09:30", "end": "09:45", "until": "11:30"}},
+      "default_range": "orb", "verified": true
+    },
+    "cme_metal": {
+      "_base": "cme_index", "venue": "COMEX",
+      "session": {"tz": "America/New_York", "flat_by": "13:25"},
+      "ranges": {"orb": {"tz": "America/New_York", "start": "08:20", "end": "08:35", "until": "10:30"}}
+    },
+    "cme_energy": {
+      "_base": "cme_index", "venue": "NYMEX",
+      "session": {"tz": "America/New_York", "flat_by": "14:25"},
+      "ranges": {"orb": {"tz": "America/New_York", "start": "09:00", "end": "09:15", "until": "11:00"}}
+    },
+    "mcx": {
+      "class": "future", "venue": "MCX", "unit": "contract", "min_qty": 1, "qty_step": 1, "max_qty": 10,
+      "value_ccy": "INR", "currencies": ["USD", "INR"], "margin": {"per_contract": null},
+      "session": {"tz": "Asia/Kolkata", "flat_by": "23:15"},
+      "ranges": {
+        "orb": {"tz": "Asia/Kolkata", "start": "09:00", "end": "09:15", "until": "11:00"},
+        "us_open": {"tz": "America/New_York", "start": "09:30", "end": "09:45", "until": "11:30"}
+      },
+      "default_range": "orb", "brokers": {},
+      "verified": false, "as_of": "2026-10",
+      "note": "MCX contract specs; check lot and tick on mcxindia.com or your broker before trading. MCX closes 23:30 IST in US summer and 23:55 IST in US winter."
+    },
+    "nse_index": {
+      "class": "future", "venue": "NSE", "unit": "contract", "min_qty": 1, "qty_step": 1, "max_qty": 10,
+      "value_ccy": "INR", "currencies": ["INR"], "margin": {"per_contract": null}, "tick_size": 0.1,
+      "session": {"tz": "Asia/Kolkata", "flat_by": "15:15"},
+      "ranges": {"orb": {"tz": "Asia/Kolkata", "start": "09:15", "end": "09:30", "until": "11:00"}},
+      "default_range": "orb", "brokers": {},
+      "verified": false, "as_of": "2026-01",
+      "note": "Lot sizes as revised from the January 2026 expiry. NSE revises lot sizes periodically and the tick size must be checked against the contract (0.05 or 0.10). Yahoo data is the cash index, not the future."
+    }
+  },
+  "instruments": {
+    "EURUSD": {"_base": "fx_major", "value_ccy": "USD", "currencies": ["EUR", "USD"], "yahoo": "EURUSD=X", "brokers": {"mt5": "EURUSD"}},
+    "GBPUSD": {"_base": "fx_major", "value_ccy": "USD", "currencies": ["GBP", "USD"], "yahoo": "GBPUSD=X", "brokers": {"mt5": "GBPUSD"}},
+    "AUDUSD": {"_base": "fx_major", "value_ccy": "USD", "currencies": ["AUD", "USD"], "yahoo": "AUDUSD=X", "brokers": {"mt5": "AUDUSD"}},
+    "NZDUSD": {"_base": "fx_major", "value_ccy": "USD", "currencies": ["NZD", "USD"], "yahoo": "NZDUSD=X", "brokers": {"mt5": "NZDUSD"}},
+    "USDCAD": {"_base": "fx_major", "value_ccy": "CAD", "currencies": ["USD", "CAD"], "yahoo": "CAD=X", "brokers": {"mt5": "USDCAD"}},
+    "USDCHF": {"_base": "fx_major", "value_ccy": "CHF", "currencies": ["USD", "CHF"], "yahoo": "CHF=X", "brokers": {"mt5": "USDCHF"}},
+    "EURGBP": {"_base": "fx_major", "value_ccy": "GBP", "currencies": ["EUR", "GBP"], "yahoo": "EURGBP=X", "brokers": {"mt5": "EURGBP"}},
+    "USDJPY": {"_base": "fx_jpy", "currencies": ["USD", "JPY"], "yahoo": "JPY=X", "brokers": {"mt5": "USDJPY"}},
+    "EURJPY": {"_base": "fx_jpy", "currencies": ["EUR", "JPY"], "yahoo": "EURJPY=X", "brokers": {"mt5": "EURJPY"}},
+    "GBPJPY": {"_base": "fx_jpy", "currencies": ["GBP", "JPY"], "yahoo": "GBPJPY=X", "brokers": {"mt5": "GBPJPY"}},
+    "XAUUSD": {
+      "_base": "fx_major", "class": "cfd", "contract_size": 100, "tick_size": 0.01, "pip_size": 0.1, "tick_value": 1.0,
+      "value_ccy": "USD", "currencies": ["USD"], "margin": {"leverage": 20}, "max_qty": 10,
+      "yahoo": "GC=F", "yahoo_proxy": true, "brokers": {"mt5": "XAUUSD"},
+      "ranges": {
+        "asia": {"tz": "Europe/London", "start": "00:00", "end": "07:00", "until": "12:00"},
+        "london": {"tz": "Europe/London", "start": "08:00", "end": "08:30", "until": "11:00"},
+        "ny": {"tz": "America/New_York", "start": "08:20", "end": "08:50", "until": "11:30"}
+      },
+      "default_range": "london",
+      "verified": false, "note": "Gold CFD: most brokers use 100 oz per lot (0.01 move = $1 per lot) but some differ. The MT5 executor re-checks the loss at the stop with the broker's own tick value."
+    },
+    "XAGUSD": {
+      "_base": "fx_major", "class": "cfd", "contract_size": 5000, "tick_size": 0.001, "pip_size": 0.01, "tick_value": 5.0,
+      "value_ccy": "USD", "currencies": ["USD"], "margin": {"leverage": 10}, "max_qty": 10,
+      "yahoo": "SI=F", "yahoo_proxy": true, "brokers": {"mt5": "XAGUSD"},
+      "verified": false, "note": "Silver CFD: 5000 oz per lot at most brokers; check yours."
+    },
+    "ES":  {"_base": "cme_index", "desc": "E-mini S&P 500", "tick_size": 0.25, "tick_value": 12.5, "yahoo": "ES=F", "brokers": {"ninjatrader": "ES {month}"}},
+    "MES": {"_base": "cme_index", "desc": "Micro E-mini S&P 500", "tick_size": 0.25, "tick_value": 1.25, "yahoo": "MES=F", "brokers": {"ninjatrader": "MES {month}"}},
+    "NQ":  {"_base": "cme_index", "desc": "E-mini Nasdaq-100", "tick_size": 0.25, "tick_value": 5.0, "yahoo": "NQ=F", "brokers": {"ninjatrader": "NQ {month}"}},
+    "MNQ": {"_base": "cme_index", "desc": "Micro E-mini Nasdaq-100", "tick_size": 0.25, "tick_value": 0.5, "yahoo": "MNQ=F", "brokers": {"ninjatrader": "MNQ {month}"}},
+    "YM":  {"_base": "cme_index", "venue": "CBOT", "desc": "E-mini Dow", "tick_size": 1.0, "tick_value": 5.0, "yahoo": "YM=F", "brokers": {"ninjatrader": "YM {month}"}},
+    "MYM": {"_base": "cme_index", "venue": "CBOT", "desc": "Micro E-mini Dow", "tick_size": 1.0, "tick_value": 0.5, "yahoo": "MYM=F", "brokers": {"ninjatrader": "MYM {month}"}},
+    "GC":  {"_base": "cme_metal", "desc": "Gold (100 oz)", "tick_size": 0.1, "tick_value": 10.0, "yahoo": "GC=F", "brokers": {"ninjatrader": "GC {month}"}},
+    "MGC": {"_base": "cme_metal", "desc": "Micro Gold (10 oz)", "tick_size": 0.1, "tick_value": 1.0, "yahoo": "MGC=F", "brokers": {"ninjatrader": "MGC {month}"}},
+    "SI":  {"_base": "cme_metal", "desc": "Silver (5000 oz)", "tick_size": 0.005, "tick_value": 25.0, "yahoo": "SI=F", "brokers": {"ninjatrader": "SI {month}"}},
+    "CL":  {"_base": "cme_energy", "desc": "Crude Oil (1000 bbl)", "tick_size": 0.01, "tick_value": 10.0, "yahoo": "CL=F", "brokers": {"ninjatrader": "CL {month}"}},
+    "MCL": {"_base": "cme_energy", "desc": "Micro Crude Oil (100 bbl)", "tick_size": 0.01, "tick_value": 1.0, "yahoo": "MCL=F", "brokers": {"ninjatrader": "MCL {month}"}},
+    "6E":  {"_base": "cme_index", "desc": "Euro FX futures", "tick_size": 0.00005, "tick_value": 6.25, "currencies": ["EUR", "USD"], "yahoo": "6E=F", "brokers": {"ninjatrader": "6E {month}"},
+            "session": {"tz": "America/New_York", "flat_by": "15:55"},
+            "ranges": {"orb": {"tz": "America/New_York", "start": "08:30", "end": "08:45", "until": "11:00"}, "london": {"tz": "Europe/London", "start": "08:00", "end": "08:30", "until": "11:00"}}},
+    "MCX_GOLD":      {"_base": "mcx", "desc": "MCX Gold (1 kg, Rs per 10 g)", "tick_size": 1.0, "tick_value": 100.0},
+    "MCX_GOLDM":     {"_base": "mcx", "desc": "MCX Gold Mini (100 g, Rs per 10 g)", "tick_size": 1.0, "tick_value": 10.0},
+    "MCX_SILVER":    {"_base": "mcx", "desc": "MCX Silver (30 kg, Rs per kg)", "tick_size": 1.0, "tick_value": 30.0},
+    "MCX_SILVERM":   {"_base": "mcx", "desc": "MCX Silver Mini (5 kg, Rs per kg)", "tick_size": 1.0, "tick_value": 5.0},
+    "MCX_CRUDEOIL":  {"_base": "mcx", "desc": "MCX Crude Oil (100 bbl, Rs per bbl)", "tick_size": 1.0, "tick_value": 100.0},
+    "MCX_CRUDEOILM": {"_base": "mcx", "desc": "MCX Crude Oil Mini (10 bbl, Rs per bbl)", "tick_size": 1.0, "tick_value": 10.0},
+    "MCX_NATURALGAS": {"_base": "mcx", "desc": "MCX Natural Gas (1250 mmBtu)", "tick_size": 0.1, "tick_value": 125.0},
+    "NIFTY":      {"_base": "nse_index", "desc": "Nifty 50 futures (lot 65)", "lot_size": 65, "tick_value": 6.5, "yahoo": "^NSEI", "yahoo_proxy": true},
+    "BANKNIFTY":  {"_base": "nse_index", "desc": "Nifty Bank futures (lot 30)", "lot_size": 30, "tick_value": 3.0, "yahoo": "^NSEBANK", "yahoo_proxy": true},
+    "FINNIFTY":   {"_base": "nse_index", "desc": "Nifty Financial Services futures (lot 60)", "lot_size": 60, "tick_value": 6.0},
+    "MIDCPNIFTY": {"_base": "nse_index", "desc": "Nifty Midcap Select futures (lot 120)", "lot_size": 120, "tick_value": 12.0}
+  }
+}

@@ -2,7 +2,7 @@
 
 Shared designs, components and features for every app, website and trading bot, so nothing gets built twice.
 
-Built from: Embroidery-Shop-Manager, paavai-embroidery-web, Microgreentracker, MT--breakoutbot, SidewayBreakoutBot, RangeBreakeoutBot, HFT-Bot. The full list of 70 reusable parts, including the ones not moved here yet, is in [CATALOGUE.md](CATALOGUE.md).
+Built from: Embroidery-Shop-Manager, paavai-embroidery-web, Microgreentracker, MT--breakoutbot, SidewayBreakoutBot, RangeBreakeoutBot, HFT-Bot. The full list of 73 reusable parts, including the ones not moved here yet, is in [CATALOGUE.md](CATALOGUE.md).
 
 ## What's inside
 
@@ -15,7 +15,7 @@ Built from: Embroidery-Shop-Manager, paavai-embroidery-web, Microgreentracker, M
 | `@rajesh-hub/offline-store` | Crash-safe on-device data, daily snapshots, photos with thumbnails, zip backup and restore, React hooks | Microgreen |
 | `@rajesh-hub/supabase-kit` | Supabase client (passkeys), audit log, edge-function error messages, feature flags; edge functions for staff invites, phone OTP, account deletion; keep-awake job | Shop Manager |
 | `@rajesh-hub/web-growth` | Astro: cookie consent, Meta Pixel + Conversions API, ad attribution, ♡ shortlist, item stats, WhatsApp button, Instagram feed, image CDN | Paavai web |
-| `trading/` | MQL5 `RiskManager`, `TradeUtils`, `Dashboard` includes; TradingView → MT5 webhook bridge (Python + Mac app); signal receiver EA | Breakout bots |
+| `trading/` | MQL5 `RiskManager`, `TradeUtils`, `Dashboard`, `FlatJson` includes; TradingView → MT5 webhook bridge (Python + Mac app); signal receiver EA; ticket executor EA for the fx-futures-trader skills | Breakout bots, fx-futures-trader |
 
 | Template | Starts |
 |---|---|

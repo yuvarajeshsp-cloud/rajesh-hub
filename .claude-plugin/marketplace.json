@@ -1,0 +1,14 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "rajesh-hub",
+  "description": "Rajesh's own Claude plugins",
+  "owner": {"name": "Rajesh", "email": "rajeshhdct@gmail.com"},
+  "plugins": [
+    {
+      "name": "fx-futures-trader",
+      "description": "Forex, gold CFD and futures (CME, MCX, NSE) trading skills: scanner, calendar, entry/exit, time machine, risk gate, MT5 / NinjaTrader / signals executor.",
+      "source": "./apps/fx-futures-trader",
+      "category": "productivity"
+    }
+  ]
+}
